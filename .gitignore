@@ -13,6 +13,8 @@ yarn-error.log*
 *.swo
 
 # Next.js 관련 추가 항목
+.next/        # Next.js 빌드 캐시 및 출력 디렉토리
+out/          # 'next export' 명령어로 생성된 정적 파일 디렉토리
 /.next/        # Next.js 빌드 캐시 및 출력 디렉토리
 /out/          # 'next export' 명령어로 생성된 정적 파일 디렉토리
 .env*.local    # 민감한 로컬 환경 변수 파일 (기본 .env는 사용자 제공 목록에 있음)
