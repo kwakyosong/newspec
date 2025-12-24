@@ -15,8 +15,8 @@ yarn-error.log*
 # Next.js 관련 추가 항목
 .next/        # Next.js 빌드 캐시 및 출력 디렉토리
 out/          # 'next export' 명령어로 생성된 정적 파일 디렉토리
-/.next/        # Next.js 빌드 캐시 및 출력 디렉토리
-/out/          # 'next export' 명령어로 생성된 정적 파일 디렉토리
+**/.next/
+**/out/
 .env*.local    # 민감한 로컬 환경 변수 파일 (기본 .env는 사용자 제공 목록에 있음)
 .vercel        # Vercel 배포 관련 로컬 구성 파일
 next-env.d.ts  # TypeScript 환경 정의 파일 (보통 자동으로 생성됨)
