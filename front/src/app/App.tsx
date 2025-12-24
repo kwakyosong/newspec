@@ -5,13 +5,14 @@ import { Footer } from './components/Footer';
 import { HomePage } from './pages/HomePage';
 import { DetailPage } from './pages/DetailPage';
 import { CommunityPage } from './pages/CommunityPage';
+import { CareerMapPage } from './pages/CareerMapPage';
 import { LoginPage } from './pages/LoginPage';
 import { DashboardPage } from './pages/admin/DashboardPage';
 import { ContentsManagePage } from './pages/admin/ContentsManagePage';
 import { UsersManagePage } from './pages/admin/UsersManagePage';
 import { Content } from './types';
 
-type Page = 'home' | 'detail' | 'community' | 'login' | 'admin-dashboard' | 'admin-contents' | 'admin-users';
+type Page = 'home' | 'detail' | 'community' | 'career-map' | 'login' | 'admin-dashboard' | 'admin-contents' | 'admin-users';
 
 function AppContent() {
   const [currentPage, setCurrentPage] = useState<Page>('home');
@@ -39,6 +40,8 @@ function AppContent() {
         );
       case 'community':
         return <CommunityPage onNavigate={handleNavigate} />;
+      case 'career-map':
+        return <CareerMapPage onNavigate={handleNavigate} />;
       case 'login':
         return <LoginPage onNavigate={handleNavigate} />;
       case 'admin-dashboard':

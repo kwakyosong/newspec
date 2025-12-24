@@ -39,3 +39,20 @@ export interface CommunityPost {
   createdAt: string;
   category: string;
 }
+
+export interface CareerStep {
+  stepId: number;
+  title: string;
+  description: string;
+  emotion: 'positive' | 'negative' | 'neutral'; // 당시 감정 상태
+  date?: string;
+}
+
+export interface CareerJourney {
+  id: string;
+  persona: string; // 예: "30대 초반 비전공자"
+  outcome: 'survivor' | 'dropout';
+  name: string; // 예: "A씨의 여정"
+  description: string;
+  steps: CareerStep[];
+}

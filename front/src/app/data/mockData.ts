@@ -148,3 +148,94 @@ export const mockCommunityPosts: CommunityPost[] = [
     category: '정보공유',
   },
 ];
+
+export const mockCareerJourneys = {
+  survivor: {
+    id: 'case-a',
+    persona: '30대 초반 비전공자',
+    outcome: 'survivor',
+    name: 'A씨 (현직 개발자)',
+    description: '비전공자로서 6개월 간의 국비지원 교육 수료 후, 3개월의 구직 활동 끝에 스타트업 취업 성공',
+    steps: [
+      {
+        stepId: 1,
+        title: '퇴사 및 결심',
+        description: '안정적이지만 성장이 없는 이전 직장 퇴사. 개발자라는 새로운 목표 설정.',
+        emotion: 'positive',
+        date: '1개월차'
+      },
+      {
+        stepId: 2,
+        title: '부트캠프 입과',
+        description: '하루 12시간씩 코딩 공부. 동료들과 스터디 그룹 결성하여 상호 피드백 진행.',
+        emotion: 'positive',
+        date: '2~4개월차'
+      },
+      {
+        stepId: 3,
+        title: '첫 번째 위기 극복',
+        description: '복잡한 알고리즘과 팀 프로젝트 갈등 발생. 멘토링을 통해 기술적 난관 해결.',
+        emotion: 'neutral',
+        date: '5개월차'
+      },
+      {
+        stepId: 4,
+        title: '포트폴리오 완성',
+        description: '실제 서비스 가능한 수준의 프로젝트 완성. 배포 및 사용자 피드백 반영 경험 확보.',
+        emotion: 'positive',
+        date: '6개월차'
+      },
+      {
+        stepId: 5,
+        title: '최종 합격',
+        description: '50군데 지원, 3곳 면접. 성장 가능성을 인정해준 핀테크 스타트업 합격.',
+        emotion: 'positive',
+        date: '9개월차'
+      }
+    ]
+  },
+  dropout: {
+    id: 'case-b',
+    persona: '30대 초반 비전공자',
+    outcome: 'dropout',
+    name: 'B씨 (재취업 준비중)',
+    description: '동일한 시기에 시작했으나, 학습 방향성 상실과 번아웃으로 인해 중도 포기 후 기존 직무 복귀 고려',
+    steps: [
+      {
+        stepId: 1,
+        title: '퇴사 및 결심',
+        description: 'IT 업계의 높은 연봉 기사만 보고 충동적 퇴사. 구체적인 학습 계획 부재.',
+        emotion: 'positive',
+        date: '1개월차'
+      },
+      {
+        stepId: 2,
+        title: '독학의 늪',
+        description: '비용 절감을 위해 인강으로 독학 시도. 피드백 없이 진도만 나가는 학습 지속.',
+        emotion: 'neutral',
+        date: '2~3개월차'
+      },
+      {
+        stepId: 3,
+        title: '고립과 정체',
+        description: '에러 해결에 3일씩 소요되며 흥미 상실. 함께할 동료가 없어 고립감 심화.',
+        emotion: 'negative',
+        date: '4개월차'
+      },
+      {
+        stepId: 4,
+        title: '포트폴리오 실패',
+        description: '튜토리얼 따라하기 수준의 프로젝트만 보유. 차별점 부족으로 서류 탈락 반복.',
+        emotion: 'negative',
+        date: '6개월차'
+      },
+      {
+        stepId: 5,
+        title: '구직 포기',
+        description: '자존감 하락과 경제적 압박으로 개발자 도전 중단. 기존 경력 살려 재취업 준비.',
+        emotion: 'negative',
+        date: '8개월차'
+      }
+    ]
+  }
+};

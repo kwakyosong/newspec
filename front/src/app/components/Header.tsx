@@ -16,6 +16,7 @@ export function Header({ onNavigate, currentPage }: HeaderProps) {
   const userNavItems = [
     { id: 'home', label: '홈' },
     { id: 'community', label: '커뮤니티' },
+    { id: 'career-map', label: '커리어 맵' },
   ];
 
   const adminNavItems = [
