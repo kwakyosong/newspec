@@ -1,7 +1,8 @@
+'use client';
 import React, { useState } from 'react';
 import { Plus, Search, Edit, Trash2, Eye, Filter } from 'lucide-react';
-import { mockContents } from '../../../data/mockData';
-import { Content, ContentCategory } from '../../../types';
+import { mockContents } from '@/app/data/mockData';
+import { Content, ContentCategory } from '@/app/types';
 
 export default function ContentsManagePage() {
   const [contents, setContents] = useState(mockContents);

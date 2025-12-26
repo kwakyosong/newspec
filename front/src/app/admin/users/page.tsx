@@ -1,6 +1,7 @@
+'use client';
 import React, { useState } from 'react';
 import { Search, UserPlus, Edit, Trash2, Shield, Building, User as UserIcon } from 'lucide-react';
-import { User, UserRole } from '../../../types';
+import { User, UserRole } from '@/app/types';
 
 const mockUsers: User[] = [
   { id: '1', email: 'admin@platform.com', name: '김관리자', role: 'super_admin' },

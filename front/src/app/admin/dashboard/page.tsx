@@ -1,3 +1,4 @@
+'use client';
 import React from 'react';
 import { BarChart3, Users, Calendar, TrendingUp, Trophy, GraduationCap } from 'lucide-react';
 import { mockContents, mockCommunityPosts } from '@/app/data/mockData';
@@ -35,7 +36,7 @@ const stats = [
   },
 ];
 
-export function DashboardPage() {
+export default function DashboardPage() {
   const recentContents = mockContents.slice(0, 5);
   const categoryStats = [
     { category: '공모전', count: mockContents.filter(c => c.category === 'contest').length, icon: Trophy },
@@ -166,7 +167,7 @@ export function DashboardPage() {
         </CardHeader>
         <CardContent>
           <div className="overflow-x-auto">
-            <table className="w-full text-sm">
+            <table className="w-full text-.sm">
               <thead className="bg-muted/50">
                 <tr>
                   <th className="px-4 py-3 text-left font-medium text-muted-foreground">제목</th>

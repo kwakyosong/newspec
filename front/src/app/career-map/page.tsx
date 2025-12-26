@@ -1,5 +1,6 @@
+'use client';
 import React from 'react';
-import { motion } from 'motion/react';
+import { motion } from 'framer-motion';
 import { 
   CheckCircle2, 
   XCircle, 
@@ -12,10 +13,10 @@ import {
   Frown,
   ArrowDown
 } from 'lucide-react';
-import { mockCareerJourneys } from '../../data/mockData';
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '../../components/ui/card';
-import { Button } from '../../components/ui/button';
-import { Badge } from '../../components/ui/badge';
+import { mockCareerJourneys } from '@/app/data/mockData';
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/app/components/ui/card';
+import { Button } from '@/app/components/ui/button';
+import { Badge } from '@/app/components/ui/badge';
 
 export default function CareerMapPage() {
   const { survivor, dropout } = mockCareerJourneys;

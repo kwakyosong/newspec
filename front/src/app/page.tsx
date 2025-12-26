@@ -1,14 +1,33 @@
+'use client';
 import React, { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { Search, Filter, Trophy, Calendar, GraduationCap, MessageSquare } from 'lucide-react';
-import { ContentCard } from '../../components/ContentCard';
-import { mockContents } from '../../data/mockData';
-import { Button } from '../../components/ui/button';
-import { Badge } from '../../components/ui/badge';
+import { ContentCard } from '@/app/components/ContentCard';
+import { mockContents } from '@/app/data/mockData';
+import { Button } from '@/app/components/ui/button';
+import { Badge } from '@/app/components/ui/badge';
+import { Content } from '@/app/types';
+
+const categories = [
+  { id: 'all', label: '전체', icon: Filter },
+  { id: 'contest', label: '공모전', icon: Trophy },
+  { id: 'event', label: '이벤트', icon: Calendar },
+  { id: 'education', label: '교육', icon: GraduationCap },
+];
 
 export default function HomePage() {
+  const router = useRouter();
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [searchQuery, setSearchQuery] = useState('');
 
+  const handleNavigate = (page: string, data?: any) => {
+    if (page === 'detail' && data) {
+      router.push(`/detail/${data.id}`);
+    } else {
+      router.push(`/${page}`);
+    }
+  };
+  
   const filteredContents = mockContents.filter((content) => {
     const matchesCategory = selectedCategory === 'all' || content.category === selectedCategory;
     const matchesSearch = content.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -109,7 +128,7 @@ export default function HomePage() {
               <ContentCard
                 key={content.id}
                 content={content}
-                onClick={() => {}}
+                onClick={() => handleNavigate('detail', content)}
               />
             ))}
           </div>
@@ -134,7 +153,7 @@ export default function HomePage() {
                 </p>
               </div>
               <Button 
-                onClick={() => {}}
+                onClick={() => handleNavigate('community')}
                 className="h-14 px-8 text-lg rounded-full bg-white text-gray-900 hover:bg-gray-100 border-none"
               >
                 <MessageSquare className="w-5 h-5 mr-2" />

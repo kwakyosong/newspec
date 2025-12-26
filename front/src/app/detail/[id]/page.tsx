@@ -1,4 +1,5 @@
-import React from 'react';
+'use client';
+import React, { use } from 'react';
 import { notFound } from 'next/navigation';
 import { Calendar, Users, Tag, MapPin, Share2, ArrowLeft, CheckCircle } from 'lucide-react';
 import { mockContents } from '@/app/data/mockData';
@@ -21,8 +22,9 @@ const statusLabels: Record<string, string> = {
   ended: '종료',
 };
 
-export default function DetailPage({ params }: { params: { id: string } }) {
-  const content = mockContents.find((c) => c.id === params.id);
+export default function DetailPage({ params }: { params: Promise<{ id: string }> }) {
+  const resolvedParams = use(params);
+  const content = mockContents.find((c) => c.id === resolvedParams.id);
 
   if (!content) {
     notFound();
@@ -124,7 +126,7 @@ export default function DetailPage({ params }: { params: { id: string } }) {
                     {content.maxParticipants && (
                       <div className="flex items-start">
                         <div className="p-3 bg-purple-50 rounded-lg mr-4">
-                          <Users className="w-6 h-6 text-purple-600" />
+.                          <Users className="w-6 h-6 text-purple-600" />
                         </div>
                         <div>
                           <p className="text-sm font-medium text-gray-500">참가 현황</p>

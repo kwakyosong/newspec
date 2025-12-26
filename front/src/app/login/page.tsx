@@ -1,9 +1,12 @@
+'use client';
 import React, { useState } from 'react';
-import { useAuth } from '../../contexts/AuthContext';
-import { UserRole } from '../../types';
+import { useRouter } from 'next/navigation';
+import { useAuth } from '@/app/contexts/AuthContext';
+import { UserRole } from '@/app/types';
 
 export default function LoginPage() {
   const { login } = useAuth();
+  const router = useRouter();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [role, setRole] = useState<UserRole>('user');
@@ -11,11 +14,11 @@ export default function LoginPage() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     login(email, password, role);
-    // In a real Next.js app, you would use useRouter for navigation here
+    
     if (role === 'super_admin' || role === 'company_admin') {
-      // router.push('/admin/dashboard');
+      router.push('/admin/dashboard');
     } else {
-      // router.push('/');
+      router.push('/');
     }
   };
 
@@ -77,7 +80,7 @@ export default function LoginPage() {
 
           <div className="mt-6 text-center">
             <button
-              onClick={() => {}} // Replaced onNavigate('home')
+              onClick={() => router.push('/')}
               className="text-blue-600 hover:text-blue-700"
             >
               홈으로 돌아가기

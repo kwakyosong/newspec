@@ -1,67 +1,67 @@
+'use client';
 import React, { useState } from 'react';
+import Link from 'next/link';
+import { usePathname, useRouter } from 'next/navigation';
 import { Menu, X, LogOut, User, LayoutDashboard } from 'lucide-react';
-import { useAuth } from '../contexts/AuthContext';
+import { useAuth } from '@/app/contexts/AuthContext';
 
-interface HeaderProps {
-  onNavigate: (page: string) => void;
-  currentPage: string;
-}
-
-export function Header({ onNavigate, currentPage }: HeaderProps) {
+export function Header() {
   const { user, logout, isAuthenticated } = useAuth();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const pathname = usePathname();
+  const router = useRouter();
 
-  const isAdminPage = currentPage.startsWith('admin');
+  const isAdminPage = pathname.startsWith('/admin');
 
   const userNavItems = [
-    { id: 'home', label: '홈' },
-    { id: 'community', label: '커뮤니티' },
-    { id: 'career-map', label: '커리어 맵' },
+    { href: '/', label: '홈' },
+    { href: '/community', label: '커뮤니티' },
+    { href: '/career-map', label: '커리어 맵' },
   ];
 
   const adminNavItems = [
-    { id: 'admin-dashboard', label: '대시보드' },
-    { id: 'admin-contents', label: '콘텐츠 관리' },
+    { href: '/admin/dashboard', label: '대시보드' },
+    { href: '/admin/contents', label: '콘텐츠 관리' },
     ...(user?.role === 'super_admin'
-      ? [{ id: 'admin-users', label: '사용자 관리' }]
+      ? [{ href: '/admin/users', label: '사용자 관리' }]
       : []),
   ];
 
   const navItems = isAdminPage ? adminNavItems : userNavItems;
 
+  const handleNavigate = (href: string) => {
+    router.push(href);
+    setMobileMenuOpen(false);
+  };
+  
   return (
     <header className="bg-white/90 backdrop-blur-md border-b sticky top-0 z-50">
       <div className="w-full max-w-[1920px] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
-          {/* 로고 */}
-          <div className="flex items-center">
-            <button
-              onClick={() => onNavigate(isAuthenticated && (user?.role === 'super_admin' || user?.role === 'company_admin') ? 'admin-dashboard' : 'home')}
-              className="flex items-center space-x-2"
-            >
-              <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg"></div>
-              <span className="font-bold text-xl">PLATFORM</span>
-            </button>
-          </div>
+          {/* Logo */}
+          <Link href={isAuthenticated && (user?.role === 'super_admin' || user?.role === 'company_admin') ? '/admin/dashboard' : '/'} className="flex items-center space-x-2">
+            <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg"></div>
+            <span className="font-bold text-xl">PLATFORM</span>
+          </Link>
 
-          {/* 데스크톱 네비게이션 */}
+          {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-8">
             {navItems.map((item) => (
-              <button
-                key={item.id}
-                onClick={() => onNavigate(item.id)}
+              <Link
+                key={item.href}
+                href={item.href}
                 className={`transition-colors ${
-                  currentPage === item.id
+                  pathname === item.href
                     ? 'text-blue-600'
                     : 'text-gray-700 hover:text-blue-600'
                 }`}
               >
                 {item.label}
-              </button>
+              </Link>
             ))}
           </nav>
 
-          {/* 사용자 메뉴 */}
+          {/* User Menu */}
           <div className="hidden md:flex items-center space-x-4">
             {isAuthenticated ? (
               <>
@@ -78,7 +78,7 @@ export function Header({ onNavigate, currentPage }: HeaderProps) {
                 </div>
                 {(user?.role === 'super_admin' || user?.role === 'company_admin') && !isAdminPage && (
                   <button
-                    onClick={() => onNavigate('admin-dashboard')}
+                    onClick={() => router.push('/admin/dashboard')}
                     className="flex items-center space-x-1 px-3 py-2 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors"
                   >
                     <LayoutDashboard className="w-4 h-4" />
@@ -86,12 +86,12 @@ export function Header({ onNavigate, currentPage }: HeaderProps) {
                   </button>
                 )}
                 {isAdminPage && (
-                  <button
-                    onClick={() => onNavigate('home')}
+                  <Link
+                    href="/"
                     className="px-3 py-2 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors"
                   >
                     사용자 페이지
-                  </button>
+                  </Link>
                 )}
                 <button
                   onClick={logout}
@@ -102,16 +102,16 @@ export function Header({ onNavigate, currentPage }: HeaderProps) {
                 </button>
               </>
             ) : (
-              <button
-                onClick={() => onNavigate('login')}
+              <Link
+                href="/login"
                 className="px-4 py-2 bg-blue-600 text-white hover:bg-blue-700 rounded-lg transition-colors"
               >
                 로그인
-              </button>
+              </Link>
             )}
           </div>
 
-          {/* 모바일 메뉴 버튼 */}
+          {/* Mobile Menu Button */}
           <button
             className="md:hidden p-2"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -121,19 +121,16 @@ export function Header({ onNavigate, currentPage }: HeaderProps) {
         </div>
       </div>
 
-      {/* 모바일 메뉴 */}
+      {/* Mobile Menu */}
       {mobileMenuOpen && (
         <div className="md:hidden border-t bg-white">
           <div className="px-4 py-2 space-y-2">
             {navItems.map((item) => (
               <button
-                key={item.id}
-                onClick={() => {
-                  onNavigate(item.id);
-                  setMobileMenuOpen(false);
-                }}
+                key={item.href}
+                onClick={() => handleNavigate(item.href)}
                 className={`block w-full text-left px-4 py-2 rounded-lg ${
-                  currentPage === item.id
+                  pathname === item.href
                     ? 'bg-blue-50 text-blue-600'
                     : 'hover:bg-gray-50'
                 }`}
@@ -148,10 +145,7 @@ export function Header({ onNavigate, currentPage }: HeaderProps) {
                 </div>
                 {(user?.role === 'super_admin' || user?.role === 'company_admin') && !isAdminPage && (
                   <button
-                    onClick={() => {
-                      onNavigate('admin-dashboard');
-                      setMobileMenuOpen(false);
-                    }}
+                    onClick={() => handleNavigate('/admin/dashboard')}
                     className="block w-full text-left px-4 py-2 hover:bg-gray-50 rounded-lg"
                   >
                     관리자 페이지
@@ -159,10 +153,7 @@ export function Header({ onNavigate, currentPage }: HeaderProps) {
                 )}
                 {isAdminPage && (
                   <button
-                    onClick={() => {
-                      onNavigate('home');
-                      setMobileMenuOpen(false);
-                    }}
+                    onClick={() => handleNavigate('/')}
                     className="block w-full text-left px-4 py-2 hover:bg-gray-50 rounded-lg"
                   >
                     사용자 페이지
@@ -180,10 +171,7 @@ export function Header({ onNavigate, currentPage }: HeaderProps) {
               </>
             ) : (
               <button
-                onClick={() => {
-                  onNavigate('login');
-                  setMobileMenuOpen(false);
-                }}
+                onClick={() => handleNavigate('/login')}
                 className="block w-full text-left px-4 py-2 bg-blue-600 text-white rounded-lg"
               >
                 로그인

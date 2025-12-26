@@ -1,7 +1,9 @@
+'use client';
+
 import React, { useState } from 'react';
 import { Search, Plus, Eye, ThumbsUp, MessageCircle, Calendar } from 'lucide-react';
-import { mockCommunityPosts } from '../../data/mockData';
-import { useAuth } from '../../contexts/AuthContext';
+import { mockCommunityPosts } from '@/app/data/mockData';
+import { useAuth } from '@/app/contexts/AuthContext';
 
 const categories = ['전체', '정보공유', '후기', '팀원모집', '질문'];
 

@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from 'next/link';
 import { Facebook, Instagram, Twitter, Mail, Phone, MapPin } from 'lucide-react';
 
 export function Footer() {
@@ -17,20 +18,20 @@ export function Footer() {
           <div>
             <h4 className="text-white font-semibold mb-4">서비스</h4>
             <ul className="space-y-2 text-sm">
-              <li><a href="#" className="hover:text-white transition-colors">공모전</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">이벤트</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">교육</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">커뮤니티</a></li>
+              <li><Link href="/contests" className="hover:text-white transition-colors">공모전</Link></li>
+              <li><Link href="/events" className="hover:text-white transition-colors">이벤트</Link></li>
+              <li><Link href="/education" className="hover:text-white transition-colors">교육</Link></li>
+              <li><Link href="/community" className="hover:text-white transition-colors">커뮤니티</Link></li>
             </ul>
           </div>
           
           <div>
             <h4 className="text-white font-semibold mb-4">고객지원</h4>
             <ul className="space-y-2 text-sm">
-              <li><a href="#" className="hover:text-white transition-colors">공지사항</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">자주 묻는 질문</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">1:1 문의</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">이용약관</a></li>
+              <li><Link href="/notices" className="hover:text-white transition-colors">공지사항</Link></li>
+              <li><Link href="/faq" className="hover:text-white transition-colors">자주 묻는 질문</Link></li>
+              <li><Link href="/contact" className="hover:text-white transition-colors">1:1 문의</Link></li>
+              <li><Link href="/terms" className="hover:text-white transition-colors">이용약관</Link></li>
             </ul>
           </div>
           
